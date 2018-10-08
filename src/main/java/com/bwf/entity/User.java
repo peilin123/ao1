@@ -4,26 +4,22 @@ import java.util.List;
 
 /**
  * 最基础的实体类
- * @author admin
+ * @author user
  *
  */
 public class User {
-	
-	
-	
-	
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", gender=" + gender + ", score=" + score + "]";
-	}
-	public User() {
-		super();
-	}
-	
 	private Integer userId;
 	private String username;
-	private String gender;
-	private Integer score;
+	private String password;
+	private String nickname;
+	private Integer leaderId;
+	
+	public Integer getLeaderId() {
+		return leaderId;
+	}
+	public void setLeaderId(Integer leaderId) {
+		this.leaderId = leaderId;
+	}
 	public Integer getUserId() {
 		return userId;
 	}
@@ -36,16 +32,18 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getGender() {
-		return gender;
+	public String getPassword() {
+		return password;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public Integer getScore() {
-		return score;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setScore(Integer score) {
-		this.score = score;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
+	
+
 }
