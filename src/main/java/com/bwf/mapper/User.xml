@@ -11,6 +11,7 @@
 		<result column="password" property="password"/>
 		<result column="nickname" property="nickname"/>
 		<result column="leader_id" property="leaderId"/>
+		<result column="icon" property="icon"/>
 	</resultMap>
   
 

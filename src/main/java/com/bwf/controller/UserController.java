@@ -6,12 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bwf.entity.User;
 import com.bwf.service.IUserService;
+import com.bwf.utils.StringUtils;
 
 
 @Controller
@@ -23,13 +25,16 @@ public class UserController {
 	IUserService userService;
 	
 	@GetMapping("login")
-	public String loginIn(){
+	public String loginIn(Integer error, ModelMap modelMap){
+		modelMap.addAttribute("error", error);
 		return "login/login";
 	}
 	@PostMapping("index")
 	public String check(User user,HttpSession session){
 		//logger.info("{},{}",user.getUsername(),user.getPassword());
-		
+		//给登入的password加密
+		user.setPassword(StringUtils.md5(user.getPassword())); 
+		logger.info(user.getPassword());
 		User Okuser=userService.login(user);
 		if(Okuser==null){
 			logger.info("登录失败，用户名或密码错误");
@@ -41,11 +46,15 @@ public class UserController {
 		logger.info("登录成功");
 		// 写入 session 
 		session.setAttribute("Okuser", Okuser );
-		return "index";
+		return "redirect:/index";
 	}
-	@RequestMapping("admin_home.html")
-	public String home(){
-		return "admin_home";
-	}
+	
+	// 退出登录
+		@GetMapping("logout")
+		public String logout( HttpSession session ){
+			session.removeAttribute("OKuser");
+			return "redirect:/user/login";
+		}
+	
 
 }
