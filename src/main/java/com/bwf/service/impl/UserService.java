@@ -18,4 +18,10 @@ public class UserService implements IUserService {
 		return userMapper.getUserByUser(user);
 	}
 
+	@Override
+	public User getUserWithMenu(Integer userId) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserWithMenuByUserId(userId);
+	}
+
 }

@@ -8,13 +8,25 @@ import java.util.List;
  *
  */
 public class User {
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", nickname=" + nickname
+				+ ", leaderId=" + leaderId + ", icon=" + icon + ", menus=" + menus + "]";
+	}
 	private Integer userId;
 	private String username;
 	private String password;
 	private String nickname;
 	private Integer leaderId;
 	private String icon;
+	private List<Menu>menus;
 	
+	public List<Menu> getMenus() {
+		return menus;
+	}
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
 	public String getIcon() {
 		return icon;
 	}

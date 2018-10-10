@@ -16,5 +16,5 @@ public interface UserMapper {
 	
 	User getUserByUser(User user);
 	
-	
+	User getUserWithMenuByUserId(Integer userId);
 }

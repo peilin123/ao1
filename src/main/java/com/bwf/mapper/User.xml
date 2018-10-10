@@ -13,6 +13,16 @@
 		<result column="leader_id" property="leaderId"/>
 		<result column="icon" property="icon"/>
 	</resultMap>
+	
+	<resultMap type="com.bwf.entity.User"  id="UserWtihMenu">
+		<id column="user_id"  property="userId"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="nickname" property="nickname"/>
+		<result column="leader_id" property="leaderId"/>
+		<result column="icon" property="icon"/>
+		<collection property="menus"  ofType="com.bwf.entity.Menu"  resultMap="com.bwf.dao.MenuMapper.newMenu"></collection>
+	</resultMap>
   
 
     <select id="getUserById" parameterType="int" resultType="com.bwf.entity.User">
@@ -21,6 +31,19 @@
     
    <select id="getUserByUser" parameterType="com.bwf.entity.User" resultMap="newUser">
         select * from `user` where username = #{username} and password=#{password};
+    </select>
+    
+    <select id="getUserWithMenuByUserId" parameterType="Integer" resultMap="UserWtihMenu">
+        SELECT
+		user.*,menu.*
+		FROM user
+		INNER JOIN user_role ON user_role.user_id = user.user_id
+		INNER JOIN role ON user_role.role_id = role.role_id
+		INNER JOIN role_permission ON role_permission.role_id = role.role_id
+		INNER JOIN permission ON role_permission.permission_id = permission.permission_id
+		INNER JOIN permission_menu ON permission_menu.permission_id = permission.permission_id
+		INNER JOIN menu ON permission_menu.menu_id = menu.menu_id
+		where user.user_id = #{userId} ;
     </select>
     
 
