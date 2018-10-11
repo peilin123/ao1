@@ -6,6 +6,5 @@ public interface IUserService {
 	
 	public User login(User user);
 
-	public User getUserWithMenu(Integer integer);
 
 }

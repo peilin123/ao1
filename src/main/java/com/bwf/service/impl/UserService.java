@@ -2,6 +2,7 @@ package com.bwf.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bwf.dao.UserMapper;
 import com.bwf.entity.User;
@@ -12,16 +13,19 @@ public class UserService implements IUserService {
 	@Autowired
 	UserMapper userMapper;
 
+	@Transactional
 	@Override
 	public User login(User user) {
 		// TODO Auto-generated method stub
-		return userMapper.getUserByUser(user);
+		//获取带有简单的User
+		User Okuser=userMapper.getUserByUser(user);
+		//获取带有Menu的User
+		if(Okuser!=null){
+			Okuser=userMapper.getUserWithMenuAndOperateByUserId(Okuser.getUserId());
+		}
+		return Okuser ;
 	}
 
-	@Override
-	public User getUserWithMenu(Integer userId) {
-		// TODO Auto-generated method stub
-		return userMapper.getUserWithMenuByUserId(userId);
-	}
+	
 
 }

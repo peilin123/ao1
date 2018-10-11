@@ -22,6 +22,7 @@
 		<result column="leader_id" property="leaderId"/>
 		<result column="icon" property="icon"/>
 		<collection property="menus"  ofType="com.bwf.entity.Menu"  resultMap="com.bwf.dao.MenuMapper.newMenu"></collection>
+		<collection property="operates"  ofType="com.bwf.entity.Operate"  resultMap="com.bwf.dao.OperateMapper.newOperate"></collection>
 	</resultMap>
   
 
@@ -33,16 +34,18 @@
         select * from `user` where username = #{username} and password=#{password};
     </select>
     
-    <select id="getUserWithMenuByUserId" parameterType="Integer" resultMap="UserWtihMenu">
+    <select id="getUserWithMenuAndOperateByUserId" parameterType="Integer" resultMap="UserWtihMenu">
         SELECT
-		user.*,menu.*
+		user.*,menu.*,operate.*
 		FROM user
 		INNER JOIN user_role ON user_role.user_id = user.user_id
 		INNER JOIN role ON user_role.role_id = role.role_id
 		INNER JOIN role_permission ON role_permission.role_id = role.role_id
 		INNER JOIN permission ON role_permission.permission_id = permission.permission_id
-		INNER JOIN permission_menu ON permission_menu.permission_id = permission.permission_id
-		INNER JOIN menu ON permission_menu.menu_id = menu.menu_id
+		left outer join permission_menu ON permission_menu.permission_id = permission.permission_id
+		left outer join menu ON permission_menu.menu_id = menu.menu_id
+		left outer join permission_operate on permission.permission_id = permission_operate.permission_id
+		left outer join operate on permission_operate.operate_id = operate.operate_id
 		where user.user_id = #{userId} ;
     </select>
     

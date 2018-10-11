@@ -1,4 +1,4 @@
-package com.bwf.service.impl;
+package com.bwf.dao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,18 +7,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.bwf.entity.User;
-import com.bwf.service.IUserService;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(locations="classpath:spring-mybatis.xml")
-public class UserServiceTest {
-	//@Autowired
-	//IUserService userService;
+public class UserMapperTest {
 	
-	@Test
-	public void testgetUserWithMenu(){
-	
-		//User u= userService.getUserWithMenu(1);
-		//System.out.println(u.toString());
-	}
+		@Autowired
+		UserMapper userMapper;
+		
+		@Test
+		public void testGetUserWithMenuAndOperateByUserId(){
+		
+			User u=userMapper.getUserWithMenuAndOperateByUserId(1);
+			System.out.println(u.getOperates().size()+"");
+		}
+
 }

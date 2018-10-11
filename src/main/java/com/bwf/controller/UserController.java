@@ -46,14 +46,9 @@ public class UserController {
 		else{
 		// 登录成功
 		logger.info("登录成功");
-		//获取有Menu的user
-		User userWithMenu=userService.getUserWithMenu(Okuser.getUserId());
-//		System.out.println(userWithMenu.toString());
-//		for(Menu menu:userWithMenu.getMenus()){
-//		System.out.println(menu.getMenuName());
-//		}
+		
 		//写入 session 
-		session.setAttribute("Okuser", userWithMenu );
+		session.setAttribute("Okuser", Okuser );
 		return "redirect:/index";
 		}
 	}
@@ -61,7 +56,8 @@ public class UserController {
 	// 退出登录
 		@GetMapping("logout")
 		public String logout( HttpSession session ){
-			session.removeAttribute("OKuser");
+			//session.removeAttribute("Okuser");
+			session.invalidate();
 			return "redirect:/user/login";
 		}
 	

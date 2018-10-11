@@ -8,11 +8,7 @@ import java.util.List;
  *
  */
 public class User {
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", nickname=" + nickname
-				+ ", leaderId=" + leaderId + ", icon=" + icon + ", menus=" + menus + "]";
-	}
+	
 	private Integer userId;
 	private String username;
 	private String password;
@@ -20,7 +16,14 @@ public class User {
 	private Integer leaderId;
 	private String icon;
 	private List<Menu>menus;
+	private List<Operate> operates;
 	
+	public List<Operate> getOperates() {
+		return operates;
+	}
+	public void setOperates(List<Operate> operates) {
+		this.operates = operates;
+	}
 	public List<Menu> getMenus() {
 		return menus;
 	}

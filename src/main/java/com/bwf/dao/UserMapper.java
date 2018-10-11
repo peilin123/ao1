@@ -1,9 +1,11 @@
 package com.bwf.dao;
 
 
+import org.springframework.stereotype.Repository;
+
 import com.bwf.entity.User;
 
-
+@Repository
 public interface UserMapper {
 	
 	User getUserById(int id);	
@@ -16,5 +18,5 @@ public interface UserMapper {
 	
 	User getUserByUser(User user);
 	
-	User getUserWithMenuByUserId(Integer userId);
+	User getUserWithMenuAndOperateByUserId(Integer userId);
 }
