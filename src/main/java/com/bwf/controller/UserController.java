@@ -46,8 +46,6 @@ public class UserController {
 		else{
 		// 登录成功
 		logger.info("登录成功");
-		System.out.println(Okuser.getOperates().size()); 
-		
 		//写入 session 
 		session.setAttribute("Okuser", Okuser );
 		return "redirect:/index";
@@ -57,10 +55,15 @@ public class UserController {
 	// 退出登录
 		@GetMapping("logout")
 		public String logout( HttpSession session ){
-			//session.removeAttribute("Okuser");
-			session.invalidate();
+			session.removeAttribute("Okuser");
+			//session.invalidate();
 			return "redirect:/user/login";
 		}
-	
+		
+		@GetMapping("manager")
+		public String userManager(  ){
+			
+			return "user/manager";
+		}
 
 }

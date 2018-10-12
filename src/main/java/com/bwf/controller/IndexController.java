@@ -14,7 +14,6 @@ public class IndexController {
 	public String index(ModelMap modelMap,HttpSession session){
 		User Okuser=(User)session.getAttribute("Okuser");
 		String icon=Okuser.getIcon();
-		System.out.println(icon);
 		modelMap.addAttribute("icon", icon);
 		return "index";
 	}
@@ -22,6 +21,11 @@ public class IndexController {
 	@RequestMapping("admin_home")
 	public String home(){
 		return "admin_home";
+	}
+	
+	@RequestMapping("error")
+	public String homeError(){
+		return "error";
 	}
 
 }

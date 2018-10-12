@@ -2,6 +2,11 @@ package com.bwf.entity;
 
 public class Operate {
 	private Integer operateId;
+	@Override
+	public String toString() {
+		return "Operate [operateId=" + operateId + ", operateName=" + operateName + ", operateAction=" + operateAction
+				+ ", operateUrl=" + operateUrl + ", pid=" + pid + "]";
+	}
 	public Integer getOperateId() {
 		return operateId;
 	}
