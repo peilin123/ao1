@@ -46,6 +46,7 @@ public class UserController {
 		else{
 		// 登录成功
 		logger.info("登录成功");
+		System.out.println(Okuser.getOperates().size()); 
 		
 		//写入 session 
 		session.setAttribute("Okuser", Okuser );
