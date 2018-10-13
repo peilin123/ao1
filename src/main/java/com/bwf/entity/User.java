@@ -13,16 +13,18 @@ public class User {
 	private String username;
 	private String password;
 	private String nickname;
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", nickname=" + nickname
-				+ ", leaderId=" + leaderId + ", icon=" + icon + ", menus=" + menus + ", operates=" + operates + "]";
-	}
 	private Integer leaderId;
 	private String icon;
 	private List<Menu>menus;
 	private List<Operate> operates;
+	private User leader;
 	
+	public User getLeader() {
+		return leader;
+	}
+	public void setLeader(User leader) {
+		this.leader = leader;
+	}
 	public List<Operate> getOperates() {
 		return operates;
 	}

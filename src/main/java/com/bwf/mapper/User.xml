@@ -12,6 +12,11 @@
 		<result column="nickname" property="nickname"/>
 		<result column="leader_id" property="leaderId"/>
 		<result column="icon" property="icon"/>
+		<association property="leader" 
+			javaType="com.bwf.entity.User" 
+			column="leader_id" 
+    		select="getUserById" >
+    	</association>
 	</resultMap>
 	
 	<resultMap type="com.bwf.entity.User"  id="UserWtihMenu">
@@ -23,10 +28,11 @@
 		<result column="icon" property="icon"/>
 		<collection property="menus"  ofType="com.bwf.entity.Menu"  resultMap="com.bwf.dao.MenuMapper.newMenu"></collection>
 		<collection property="operates"  ofType="com.bwf.entity.Operate"  resultMap="com.bwf.dao.OperateMapper.newOperate"></collection>
+		
 	</resultMap>
   
 
-    <select id="getUserById" parameterType="int" resultType="com.bwf.entity.User">
+    <select id="getUserById" parameterType="int" resultMap="newUser">
         select * from `user` where user_id = #{id}
     </select>
     
@@ -47,6 +53,10 @@
 		left outer join permission_operate on permission.permission_id = permission_operate.permission_id
 		left outer join operate on permission_operate.operate_id = operate.operate_id
 		where user.user_id = #{userId} ;
+    </select>
+    
+    <select id="getAllUser"  resultMap="newUser" >
+    		select *from user;
     </select>
     
 

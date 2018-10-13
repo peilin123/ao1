@@ -1,5 +1,7 @@
 package com.bwf.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -61,8 +63,9 @@ public class UserController {
 		}
 		
 		@GetMapping("manager")
-		public String userManager(  ){
-			
+		public String userManager(ModelMap modelMap  ){
+			List<User> allUser=userService.getAllUser();
+			modelMap.addAttribute("allUser", allUser);
 			return "user/manager";
 		}
 
