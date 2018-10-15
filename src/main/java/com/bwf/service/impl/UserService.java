@@ -29,9 +29,18 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public List<User> getAllUser() {
+	public List<User> getAllUser(Integer pageCount, Integer fenYeShu) {
 		// TODO Auto-generated method stub
-		return userMapper.getAllUser();
+		Integer pageCounts=(pageCount-1)*fenYeShu;
+		return userMapper.getAllUser( pageCounts,  fenYeShu);
+	}
+
+	@Override
+	public Integer getPages(int per) {
+		// TODO Auto-generated method stub
+		 Integer pageCount=userMapper.getPages();
+		 Integer pages=(int) Math.ceil( pageCount*1.0/per);
+		return pages;
 	}
 
 	

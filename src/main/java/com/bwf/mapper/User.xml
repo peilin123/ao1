@@ -56,8 +56,10 @@
     </select>
     
     <select id="getAllUser"  resultMap="newUser" >
-    		select *from user;
+    		select *from user limit #{p} ,#{f} ;
     </select>
-    
+     <select id="getPages"  resultType="Integer" >
+    		select count(*) from user;
+    </select>
 
 </mapper>

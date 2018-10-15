@@ -3,6 +3,7 @@ package com.bwf.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.bwf.entity.User;
@@ -22,6 +23,8 @@ public interface UserMapper {
 	
 	User getUserWithMenuAndOperateByUserId(Integer userId);
 
-	List<User> getAllUser();
+	List<User> getAllUser(@Param("p") Integer pageCount,@Param("f") Integer fenYeShu);
+
+	Integer getPages();
 	
 }

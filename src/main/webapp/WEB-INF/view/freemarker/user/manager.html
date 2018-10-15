@@ -11,10 +11,40 @@
 		<script type="text/javascript" src="${rc.contextPath}/js/wow.js" ></script>
 		<link rel="stylesheet" href="${rc.contextPath}/css/global.css" />
 		<script type="text/javascript" src="${rc.contextPath}/js/global.js" ></script>
+		<script type="text/javascript">
+				$(function(){
+					var pages=${pages};
+					for(var i=1 ;i<=pages;i++){
+						$("#page1").append('<input type="button"  class="btn btn-primary page-btn"   value="'+i+' " />');
+					};
+					
+					var hou='<button type="button" class="btn btn-default hidden-xs hidden-sm">.…</button>'
+					+'<button type="button" class="btn btn-darkgreen">'
+					+'<span class="hidden-xs hidden-sm"> 下一页 </span>'
+					+'<span class="hidden-lg hidden-md"> &gt;&gt; </span>'
+					+'</button>'
+					+'<button type="button" class="btn btn-darkgreen">'
+					+'<span class="hidden-xs hidden-sm"> 末 页 </span>'
+					+'<span class="hidden-lg hidden-md"> &gt;|</span></button>';
+					$("#page1").append(hou);
+					
+					$("#page1").on("click",".page-btn",function(){
+					var zhi=$(this).val();
+						location.href='${rc.contextPath}/user/manager?pageCount='+zhi;
+					});
+					
+					$(".userDelete").click( function(){
+						var zhi2=$(this).val();
+						console.log(zhi2);
+						location.href='${rc.contextPath}/user/delete?userId='+zhi2;
+						
+					});
+				});
+		</script>
 	</head>
 	<body>
 			
-			<form action="" method="POST" role="form">
+			<form action="" method="get" role="form">
 			
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -49,6 +79,7 @@
 								</tr>
 							</thead>
 							<tbody>
+								
 								<#list allUser as user1>
 								<tr>
 									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
@@ -58,14 +89,14 @@
 									<td>${user1.leader.nickname}</td>
 									<td><img style="height:30px;" class="image image-responsive" src="${rc.contextPath}/img/dogs/${user1.icon}"/></td>
 									<td width="120px">
-										<span class="btn-group btn-group-xs" >
+										<span class="btn-group btn-group-xs  " >
 											<button type="button" class="btn btn-default">查看</button>
 											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
+											<button type="button" class="btn btn-danger userDelete" value="${user1.userId}">删除</button>
 										</span>
 									</td>
-								</tr>
-								</#list>
+									</tr>
+									</#list>
 								
 							</tbody>
 							<tfoot>
@@ -75,7 +106,7 @@
 						
 						<div class="row">
 							<div class="col-lg-8 col-md-7 col-sm-7 col-xs-5">
-								<div class="btn-group btn-group-sm">
+								<div class="btn-group btn-group-sm" id="page1">
 									<button type="button" class="btn btn-darkgreen">
 										<span class="hidden-xs hidden-sm"> 首 页 </span>
 										<span class="hidden-lg hidden-md"> |&lt; </span>
@@ -87,44 +118,8 @@
 									<button type="button" class="btn btn-default hidden-xs hidden-sm">
 										.…
 									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm hidden-md">
-										3
-									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm">
-										4
-									</button>
-									<button type="button" class="btn btn-default hidden-xs">
-										5
-									</button>
-									<button type="button" class="btn btn-default hidden-xs">
-										6
-									</button>
-									<button type="button" class="btn btn-darkgreen hidden-xs">
-										7
-									</button>
-									<button type="button" class="btn btn-default hidden-xs">
-										8
-									</button>
-									<button type="button" class="btn btn-default hidden-xs">
-										9
-									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm">
-										10
-									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm hidden-md">
-										11
-									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm">
-										.…
-									</button>
-									<button type="button" class="btn btn-darkgreen">
-										<span class="hidden-xs hidden-sm"> 下一页 </span>
-										<span class="hidden-lg hidden-md"> &gt;&gt; </span>
-									</button>
-									<button type="button" class="btn btn-darkgreen">
-										<span class="hidden-xs hidden-sm"> 末 页 </span>
-										<span class="hidden-lg hidden-md"> &gt;| </span>
-									</button>
+									
+									
 								</div>
 								
 							</div>

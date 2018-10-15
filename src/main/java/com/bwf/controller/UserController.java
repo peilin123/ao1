@@ -63,10 +63,24 @@ public class UserController {
 		}
 		
 		@GetMapping("manager")
-		public String userManager(ModelMap modelMap  ){
-			List<User> allUser=userService.getAllUser();
+		public String userManager(ModelMap modelMap,Integer pageCount  ){
+			Integer fenYeShu=10;
+			if(pageCount==null){
+				//pageCount 当前页码
+				pageCount=1;
+			}
+			List<User> allUser=userService.getAllUser(pageCount,fenYeShu);
 			modelMap.addAttribute("allUser", allUser);
+			//分页
+			Integer pages = userService.getPages(fenYeShu);
+			modelMap.addAttribute("pages", pages);
 			return "user/manager";
+		}
+		
+		@GetMapping("delete")
+		public String userDelete(Integer userId){
+			System.out.println("userId:"+userId);
+			return "redirect:/user/manager";
 		}
 
 }
