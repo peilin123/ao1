@@ -61,5 +61,23 @@
      <select id="getPages"  resultType="Integer" >
     		select count(*) from user;
     </select>
+    
+    <select id="getAllUsers"  resultMap="newUser">
+        select * from `user`
+    </select>
+    
+    <insert id="saveUser"  parameterType="com.bwf.entity.User"  >
+    	insert into user(username,password,nickname,leader_id) value( #{username},#{password},#{nickname},#{leaderId} );
+    </insert>
+    
+    <update id="updateUser"  parameterType="com.bwf.entity.User" >
+    	update `user` set 
+    		username = #{username} , 
+    		password = #{password} , 
+    		nickname = #{nickname} ,
+    		leader_id = #{leaderId} ,
+    		icon = #{icon}
+    	where user_id = #{userId}
+    </update>
 
 </mapper>

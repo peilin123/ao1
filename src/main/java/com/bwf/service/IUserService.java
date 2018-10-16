@@ -12,5 +12,15 @@ public interface IUserService {
 
 	public Integer getPages(int i);
 
+	public List<User> getAllUsers();
+
+	public void saveUser(User user);
+
+	public void editUser(User user);
+
+	public User getUserByUserId(Integer userId);
+
+	public void updateUser(User user);
+
 
 }

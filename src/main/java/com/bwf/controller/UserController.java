@@ -79,7 +79,40 @@ public class UserController {
 		
 		@GetMapping("delete")
 		public String userDelete(Integer userId){
-			System.out.println("userId:"+userId);
+			//System.out.println("userId:"+userId);
+			return "redirect:/user/manager";
+		}
+		
+		@GetMapping("add")
+		public String userAdd(ModelMap modelMap){
+			List<User> allUsers=userService.getAllUsers();
+			modelMap.addAttribute("allUsers", allUsers);
+			return "user/add";
+		}
+		
+		@PostMapping("doAdd")
+		public String userSave(User user){
+			userService.saveUser(user);
+			
+			return "redirect:/user/manager";
+		}
+		
+		@GetMapping("edit")
+		public String getUserEdit(Integer userId,ModelMap modelMap){
+			//根据编辑的userID，进数据库查出user信息
+			User user1=userService.getUserByUserId(userId);
+			modelMap.addAttribute("user1", user1);
+			//获取所有用户信息
+			List<User> allUsers=userService.getAllUsers();
+			modelMap.addAttribute("allUsers", allUsers);
+			return "user/edit";
+		}
+		
+		@GetMapping("doEdit")
+		public String userEdit(User user){
+			//将编辑后的user写入数据库
+			userService.updateUser(user);
+			
 			return "redirect:/user/manager";
 		}
 

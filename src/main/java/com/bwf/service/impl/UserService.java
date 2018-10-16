@@ -43,6 +43,36 @@ public class UserService implements IUserService {
 		return pages;
 	}
 
+	@Override
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return userMapper.getAllUsers();
+	}
+
+	@Override
+	public void saveUser(User user) {
+		// TODO Auto-generated method stub
+		userMapper.saveUser(user);
+	}
+
+	@Override
+	public void editUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public User getUserByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserById(userId);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		userMapper.updateUser(user);
+	}
+
 	
 
 }

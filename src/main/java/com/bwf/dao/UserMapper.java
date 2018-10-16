@@ -26,5 +26,11 @@ public interface UserMapper {
 	List<User> getAllUser(@Param("p") Integer pageCount,@Param("f") Integer fenYeShu);
 
 	Integer getPages();
+
+	List<User> getAllUsers();
+
+	void saveUser(User user);
+
+	void updateUser(User user);
 	
 }

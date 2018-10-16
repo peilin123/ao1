@@ -32,13 +32,25 @@
 					var zhi=$(this).val();
 						location.href='${rc.contextPath}/user/manager?pageCount='+zhi;
 					});
-					
+					//删除用户
 					$(".userDelete").click( function(){
 						var zhi2=$(this).val();
-						console.log(zhi2);
+						//console.log(zhi2);
 						location.href='${rc.contextPath}/user/delete?userId='+zhi2;
-						
 					});
+					
+					//添加用户请求
+					$(".addUser").click(function(){
+						location.href='${rc.contextPath}/user/add';
+					});
+					
+					//编辑用户
+					$(".userEdit").click( function(){
+						var zhi3=$(this).val();
+						console.log(zhi3);
+						location.href='${rc.contextPath}/user/edit?userId='+zhi3;
+					});
+					
 				});
 		</script>
 	</head>
@@ -55,7 +67,7 @@
 						<img src="${rc.contextPath}/img/7.png" height="16px"/>
 						&nbsp;&nbsp;批量删除
 					</button>
-					<button type="button" class="btn btn-default">
+					<button type="button" class="btn btn-default  addUser">
 						<img src="${rc.contextPath}/img/plus.png" height="16px"/>
 						&nbsp;&nbsp;添加数据
 					</button>
@@ -91,7 +103,7 @@
 									<td width="120px">
 										<span class="btn-group btn-group-xs  " >
 											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
+											<button type="button" class="btn btn-default userEdit" value="${user1.userId}">编辑</button>
 											<button type="button" class="btn btn-danger userDelete" value="${user1.userId}">删除</button>
 										</span>
 									</td>
