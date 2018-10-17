@@ -4,17 +4,18 @@ public class Role {
 
 	private Integer roleId;
 	private String roleName;
-	private Integer department_id;
+	private Integer departmentId;
 	private Department department;
 	
 	
 
-	public Integer getDepartment_id() {
-		return department_id;
+
+	public Integer getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setDepartment_id(Integer department_id) {
-		this.department_id = department_id;
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
 	}
 
 	public Integer getRoleId() {

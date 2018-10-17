@@ -1,8 +1,10 @@
 package com.bwf.entity;
 
+import java.util.List;
+
 public class Department {
 	
-	private Integer deparmentId;
+	private Integer departmentId;
 	
 	private String departmentName;
 	
@@ -10,22 +12,27 @@ public class Department {
 	
 	private User leader;
 	
+	// 部门下的所有所属员工
+		private List<User> users;
 	
-	
 
-	@Override
-	public String toString() {
-		return "Department [deparmentId=" + deparmentId + ", departmentName=" + departmentName + ", pid=" + pid
-				+ ", leader=" + leader + "]";
-	}
 
-	public Integer getDeparmentId() {
-		return deparmentId;
-	}
 
-	public void setDeparmentId(Integer deparmentId) {
-		this.deparmentId = deparmentId;
-	}
+	public Integer getDepartmentId() {
+			return departmentId;
+		}
+
+		public void setDepartmentId(Integer departmentId) {
+			this.departmentId = departmentId;
+		}
+
+	public List<User> getUsers() {
+			return users;
+		}
+
+		public void setUsers(List<User> users) {
+			this.users = users;
+		}
 
 	public String getDepartmentName() {
 		return departmentName;

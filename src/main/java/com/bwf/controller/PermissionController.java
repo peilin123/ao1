@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bwf.entity.Permission;
 import com.bwf.entity.Role;
@@ -47,8 +48,12 @@ public class PermissionController {
 	}
 	
 	@GetMapping("save")
-	public void PermissionSave(){
-		
+	public String PermissionSave(Integer roleId,@RequestParam("permissionId") Integer[] permissionIds){
+				// 更新该角色的权限
+				permissionService.updatePermissionByRoleId( roleId , permissionIds );
+				
+				// 跳回到 权限管理页面
+				return "redirect:/permission/manage";
 	}
 
 }

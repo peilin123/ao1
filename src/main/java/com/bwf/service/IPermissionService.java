@@ -12,4 +12,6 @@ public interface IPermissionService {
 
 	List<Integer> getPermissionIdFormPermissionList(List<Permission> currentRolePermissions);
 
+	void updatePermissionByRoleId(Integer roleId, Integer[] permissionIds);
+
 }

@@ -38,15 +38,15 @@ public class PermissionServiceImpl implements IPermissionService {
 		return list;
 	}
 
-//	@Transactional
-//	@Override
-//	public void updatePermissionByRoleId(Integer roleId, Integer[] permissionIds) {
-//		
-//		// 1) 删除该角色的所有权限
-//		permissionMapper.deletePermissionsByRoleId( roleId );
-//		
-//		// 2) 给该角色添加新的权限
-//		permissionMapper.addPermissions( roleId , permissionIds );
-//	}
+	@Transactional
+	@Override
+	public void updatePermissionByRoleId(Integer roleId, Integer[] permissionIds) {
+		
+		// 1) 删除该角色的所有权限
+		permissionMapper.deletePermissionsByRoleId( roleId );
+		
+		// 2) 给该角色添加新的权限
+		permissionMapper.addPermissions( roleId , permissionIds );
+	}
 
 }
