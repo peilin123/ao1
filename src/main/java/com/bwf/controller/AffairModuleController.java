@@ -1,14 +1,25 @@
 package com.bwf.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bwf.entity.AffairModule;
+import com.bwf.entity.AffairModuleChain;
+import com.bwf.entity.ModuleOption;
+import com.bwf.entity.User;
+import com.bwf.service.IAffairModuleChainService;
+import com.bwf.service.IAffairModuleService;
 import com.bwf.service.IDepartmentService;
+import com.bwf.service.IModuleOptionService;
 
 
 // 公文模板控制器 
@@ -18,10 +29,21 @@ public class AffairModuleController {
 	
 	@Autowired
 	IDepartmentService departmentService;
+	
+	@Autowired
+	IAffairModuleService affairModuleService;
+	
+	@Autowired
+	IModuleOptionService moduleOptionService;
+
+	@Autowired
+	IAffairModuleChainService affairModuleChainService;
+
 
 	@GetMapping("show")
-	public String show(){
-		
+	public String show(ModelMap modelMap){
+		List<AffairModule> affairModules = affairModuleService.getAll();
+		modelMap.addAttribute("affairModules", affairModules);
 		return "affair_module/show";
 	}
 	
@@ -37,34 +59,37 @@ public class AffairModuleController {
 			String[] optionName , 
 			Integer[] optionId , 
 			String[] optionData ,
-			Integer[] approverId 
+			Integer[] approverId ,HttpSession session
 	) {
-		// 公文模板表 新增一条数据
-		System.out.println( affairModule.getAffairModuleName() );
+		User user = ( User ) session.getAttribute("Okuser");
+		affairModule.setAffairModuleProducerId( user.getUserId() );
 		
-		for( int i=0; i < optionName.length ; i++) {
-			System.out.println( optionId[i] + ":" + optionName[i] );
-			if ( !optionData[i].trim().isEmpty() ) {
-				System.out.println( "\t" + optionData[i] );
-			}
-		}
-		
-		// 模板选项关系表中 新增 n 条数据
-		//   1) 获取 刚刚 公文模板表中新增的数据的自增列的值？
-		
-		//  如果该选项有选项数据 
-		//   往 该选项对应的选项数据表中 填写对应的m条数据
-		//
-		
-		
-		// 往模板审批表中写入l条数据
-		System.out.print( "审批人编号：" );
-		for( int i=0;i<approverId.length ; i++ ) {
-			 System.out.print( approverId[i] + "," );
-		}
-		
-		return null;
+		affairModuleService.add( affairModule ,optionName , optionId ,  optionData, approverId );
+	
+		return "redirect:/affair_module/show";
 	}
 	
+	@GetMapping("edit/{id}")
+	public String edit( @PathVariable("id") Integer id , ModelMap modelMap){
+		AffairModule affairModule = affairModuleService.getAffairModuleById(id);
+		List<ModuleOption> moduleOptions = moduleOptionService.getModuleOptionsByAffairModuleId(id);
+		List<AffairModuleChain> affairModuleChains = affairModuleChainService.getAffairModuleChainsByAffairModuleId(id);
+		
+		
+		modelMap.addAttribute("affairModule", affairModule);
+		modelMap.addAttribute("moduleOptions", moduleOptions);
+		modelMap.addAttribute("allDepartments", departmentService.getAll() ) ;
+		modelMap.addAttribute("affairModuleChains", affairModuleChains);
+		modelMap.addAttribute("id", id);
+		
+		return "affair_module/edit";
+	}
+	
+	@PostMapping("doEdit/{id}")
+	public String doEdit(  @PathVariable("id") Integer id  ){
+		
+		// 实现编辑模板功能
+		return null;
+	}
 	
 }

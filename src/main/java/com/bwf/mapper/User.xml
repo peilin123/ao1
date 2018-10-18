@@ -79,5 +79,9 @@
     		icon = #{icon}
     	where user_id = #{userId}
     </update>
+    
+    <select id="getUserWithLeader" parameterType="com.bwf.entity.User" resultMap="newUser">
+        select * from `user` where user_id = #{userId} ;
+    </select>
 
 </mapper>

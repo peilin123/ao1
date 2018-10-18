@@ -32,5 +32,7 @@ public interface UserMapper {
 	void saveUser(User user);
 
 	void updateUser(User user);
+
+	User getUserWithLeader(User currentUser);
 	
 }
