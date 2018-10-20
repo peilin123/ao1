@@ -8,4 +8,6 @@ public interface RoleMapper {
 
 	List<Role> getAllRoles();
 
+	List<Role> getRolesByDepartmentId(Integer departmentId);
+
 }

@@ -10,4 +10,6 @@ public interface AffairChainMapper {
 
 	void add(@Param("affairChains") List<AffairChain> affairChains);
 
+	List<AffairChain> getAffairChainsByAffairId(Integer id);
+
 }

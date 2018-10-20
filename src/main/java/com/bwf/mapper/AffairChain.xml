@@ -12,6 +12,12 @@
 		<result column="affair_chain_status" property="affairChainStatus"/>
 		<result column="affair_chain_comment" property="affairChainComment"/>
 		<result column="approver" property="approver"/>
+		<association property="approver1" 
+							javaType="com.bwf.entity.User"
+							column="approver" 
+							resultMap="com.bwf.dao.UserMapper.newUser"
+		>
+		</association>
 	</resultMap>
 	
 	<insert id="add" >
@@ -22,6 +28,10 @@
 		</foreach>
 	</insert>
 	
-
+	<select id="getAffairChainsByAffairId"  parameterType="Integer"  resultMap="affairChain">
+			select *from affair_chain  
+			inner join user on affair_chain.approver=user.user_id 
+			where affair_id=#{id};
+	</select>
 
 </mapper>

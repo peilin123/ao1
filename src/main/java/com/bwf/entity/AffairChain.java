@@ -12,6 +12,16 @@ public class AffairChain {
 	private String affairChainComment;
 	
 	private Integer approver;
+	
+	private User approver1;
+
+	public User getApprover1() {
+		return approver1;
+	}
+
+	public void setApprover1(User approver1) {
+		this.approver1 = approver1;
+	}
 
 	public Integer getAffairChainId() {
 		return affairChainId;

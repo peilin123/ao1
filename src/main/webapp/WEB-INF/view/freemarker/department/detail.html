@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>BWFUIFramework</title>
+		<link rel="stylesheet" href="${rc.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${rc.contextPath}/css/animate.min.css" />
+		<script type="text/javascript" src="${rc.contextPath}/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/js/wow.js" ></script>
+		<link rel="stylesheet" href="${rc.contextPath}/css/global.css" />
+		<script type="text/javascript" src="${rc.contextPath}/js/global.js" ></script>
+		<script type="text/javascript">
+				$(function(){
+						$(".btnBack").click(function(){
+							history.back();
+						});
+					
+				});
+		</script>
+	</head>
+	<body>
+			
+			<form action="" method="get" role="form">
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+				<input type="button" class="btn btn-info btnBack" value="返回"/><hr/>
+					部门详细信息<br/>
+					
+					</div>
+				</div>
+				
+				<div class="panel-body">
+						部门名称：<input type="text"  value="${department.departmentName}"/><br>
+						部门领导：<input type="text"  value="${department.leader.nickname}"/>
+						<hr/>
+						<table class="table table-bordered table-condensed table-hover table-responsive cbx-group">
+							<thead>
+								<tr>
+									<th class="td-checkbox"><input type="checkbox" class="cbx-all"/></th>
+									<th>上级部门</th>	
+									<th>下级部门</th>
+									<th>部门职位</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								<tr>
+									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
+									<td align="center" >
+										<#list allDepartment as department2>
+											<#if department2.departmentId=department.pid>
+											<input type="text"  value="${department2.departmentName}"/>
+											</#if>
+										</#list>
+									</td >
+									<td align="center" >
+										<#list allDepartment as department3>
+											<#if department3.pid=department.departmentId>
+											<input type="text"  value="${department3.departmentName}"/><br/>
+											</#if>
+										</#list>
+									</td >
+									<td align="center" >
+										<#list roles as role>
+											<input type="text"  value="${role.roleName}"/><br/>
+										</#list>
+									</td >
+									
+									
+									
+								</tr>
+							<div>
+								<input type="hidden"  name="departmentId" value="${department.departmentId}" >
+							
+							</div>
+								
+							</tbody>
+							<tfoot>
+								
+							</tfoot>
+						</table>
+						
+					
+				</div>
+			</div>
+			
+		</form>
+		<div style="height: 80px;"></div>
+	</body>
+</html>
+

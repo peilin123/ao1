@@ -13,10 +13,22 @@
 		<!-- <association property="leader" column="user_id" javaType="com.bwf.entity.User"></association> -->
 		<collection 
 			property="users" 
-			
 			ofType="com.bwf.entity.User" 
 			resultMap="com.bwf.dao.UserMapper.newUser" >
 		</collection>
+	</resultMap>
+	
+	<resultMap type="com.bwf.entity.Department" id="simpleDepartment">
+		<id column="department_id" property="departmentId"/>
+		<result column="department_name" property="departmentName"/>
+		<result column="pid" property="pid"/>
+		<association 
+					property="leader" 
+					column="user_id"  
+					javaType="com.bwf.entity.User"
+					resultMap="com.bwf.dao.UserMapper.newUser"
+					>
+		</association>
 	</resultMap>
 	
 	<!-- 查询所有部门，和部门下所属员工 -->
@@ -28,6 +40,36 @@
 		inner join user_role on role.role_id = user_role.role_id
 		inner join user as u on user_role.user_id = u.user_id
 	</select>
-
-
+	
+	<select id="getAllSimpleDepartment"    resultMap="simpleDepartment">
+		select department.*,user.* from department 
+		inner join user on department.user_id=user.user_id;
+	</select>
+	
+	<insert id="add" parameterType="com.bwf.entity.Department">
+		insert into department values(null,
+		#{departmentName},
+		#{pid},
+		#{userId} );
+	</insert>
+	
+	<select id="getDepartmentByDepartmentId"  parameterType="Integer"   resultMap="simpleDepartment">
+		select department.*,user.* from department 
+		inner join user on department.user_id=user.user_id
+		where department_id=#{departmentId};
+	</select>
+	
+	<update id="doEdit" parameterType="com.bwf.entity.Department"  >
+			update department set 
+			department_name=#{departmentName},
+			 pid=#{pid},
+			 user_id=#{userId}
+			 where department_id=#{departmentId};
+	</update>
+	
+	<delete id="delete" parameterType="com.bwf.entity.Department" >
+			delete from department where department_id=#{departmentId};
+	</delete>
+	
+	
 </mapper>

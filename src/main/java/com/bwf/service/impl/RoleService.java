@@ -20,4 +20,10 @@ public class RoleService implements IRoleService {
 		return roleMapper.getAllRoles();
 	}
 
+	@Override
+	public List<Role> getRolesByDepartmentId(Integer departmentId) {
+		// TODO Auto-generated method stub
+		return roleMapper.getRolesByDepartmentId(departmentId);
+	}
+
 }

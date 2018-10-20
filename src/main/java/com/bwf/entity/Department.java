@@ -10,13 +10,23 @@ public class Department {
 	
 	private Integer pid;
 	
+	private Integer userId;
+	
 	private User leader;
 	
 	// 部门下的所有所属员工
 		private List<User> users;
 	
+		
 
 
+	public Integer getUserId() {
+			return userId;
+		}
+
+		public void setUserId(Integer userId) {
+			this.userId = userId;
+		}
 
 	public Integer getDepartmentId() {
 			return departmentId;

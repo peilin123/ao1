@@ -11,6 +11,12 @@ public class User {
 	
 	private Integer userId;
 	private String username;
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", nickname=" + nickname
+				+ ", leaderId=" + leaderId + ", icon=" + icon + ", menus=" + menus + ", operates=" + operates
+				+ ", leader=" + leader + "]";
+	}
 	private String password;
 	private String nickname;
 	private Integer leaderId;

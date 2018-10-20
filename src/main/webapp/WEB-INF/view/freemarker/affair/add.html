@@ -13,12 +13,49 @@
 		<script type="text/javascript" src="${rc.contextPath}/js/global.js" ></script>
 		<script type="text/javascript">
 			$(function(){
-				$('#btnSubmit').click(function(){
-					var html = $('#formAffair').html();
+					$('#btnSubmit').click(function(){
+					$('#formAffair').find( 'input' ).each( function(i,e){
+						var val = $(e).val();
 					
-					location.href = "${rc.contextPath}/affair/doAdd?affairModuleId="+ ${affairModuleId} +"&html=" + html;
+						if(  $(e).attr("type") == "checkbox" || $(e).attr("type") == "radio" ) {
+							if ( $(e).prop('checked') ) {
+								$(e).attr('checked' , 'checked');	
+								$(e).attr('disabled' , 'disabled');							
+							}
+						} else {
+							if ( val.trim() != '' ) {
+								var clone = $(e).clone();
+								clone.attr('value' , $(e).val());															
+								$(e).after( clone ).remove();	
+								clone.attr('disabled' , 'disabled');
+							}
+						}
+						
+					} );
+					
+					$('#formAffair').find('textarea').each( function(i,e){
+						var clone = $(e).clone();
+						clone.html ( $(e).val() );						
+						$(e).after( clone ).remove();
+						clone.attr('disabled' , 'disabled');						
+					} );
+					
+					$('#formAffair').find('select').each( function(i,e){
+						$(e).find('option').each( function(i1,e1) {
+							if( $(e1).prop('selected') ) {
+								$(e1).attr('selected' , 'selected');								
+							}
+						});
+						$(e).attr('disabled' , 'disabled');		
+					});
 				
+				
+					var html = $('#formAffair').html();
+					location.href = "${rc.contextPath}/affair/doAdd?affairModuleId="+ ${affairModuleId} +"&html=" + html;
 				});
+				
+				
+				
 			});
 		
 		</script>

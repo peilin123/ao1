@@ -26,6 +26,11 @@
 		<result column="nickname" property="nickname"/>
 		<result column="leader_id" property="leaderId"/>
 		<result column="icon" property="icon"/>
+		<association property="leader" 
+			javaType="com.bwf.entity.User" 
+			column="leader_id" 
+    		select="getUserById" >
+    	</association>
 		<collection property="menus"  ofType="com.bwf.entity.Menu"  resultMap="com.bwf.dao.MenuMapper.newMenu"></collection>
 		<collection property="operates"  ofType="com.bwf.entity.Operate"  resultMap="com.bwf.dao.OperateMapper.newOperate"></collection>
 		

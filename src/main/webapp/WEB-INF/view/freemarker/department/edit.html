@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>BWFUIFramework</title>
+		<link rel="stylesheet" href="${rc.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${rc.contextPath}/css/animate.min.css" />
+		<script type="text/javascript" src="${rc.contextPath}/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/js/wow.js" ></script>
+		<link rel="stylesheet" href="${rc.contextPath}/css/global.css" />
+		<script type="text/javascript" src="${rc.contextPath}/js/global.js" ></script>
+		<script type="text/javascript">
+				$(function(){
+						$(".btnBack").click(function(){
+							history.back();
+						});
+					
+				});
+		</script>
+	</head>
+	<body>
+			
+			<form action="${rc.contextPath}/department/doEdit" method="get" role="form">
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+				<input type="button" class="btn btn-default btnBack" value="返回"/><hr/>
+					部门管理<br/>
+					
+					</div>
+				</div>
+				
+				<div class="panel-body">
+					
+						<table class="table table-bordered table-condensed table-hover table-responsive cbx-group">
+							<thead>
+								<tr>
+									<th class="td-checkbox"><input type="checkbox" class="cbx-all"/></th>
+									<th>编辑部门名称</th>
+									<th>当前部门领导</th>
+									<th>编辑部门领导</th>
+									<th>当前上级部门名称</th>	
+									<th>编辑上级部门名称</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								
+								<tr>
+									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
+									<td align="center" >
+										<input type="text"  name="departmentName" value="${department.departmentName}"/>
+									</td >
+									<td align="center" >
+										<input type="text"  value="${department.leader.nickname}"/>
+									</td >
+									<td align="center" >
+										<select name="userId" >
+										<option>--请选择部门领导--</option>
+										<#list allUser as user>
+											<option value="${user.userId}">${user.nickname}</option>
+										</#list>
+										</select>
+									</td>
+									
+									<td align="center" >
+									<#list  allDepartment as department3>
+										<#if department3.departmentId=department.pid>
+										<input type="text"  value="${department3.departmentName}"/>
+										</#if>
+									</#list>
+									</td >
+									
+									<td align="center" >
+										<select name="pid" >
+										<option>--请选择上级部门--</option>
+										<#list allDepartment as department2>
+											<#if department2.departmentName!=department.departmentName>
+													<option value="${department2.departmentId}">${department2.departmentName}</option>
+											</#if>
+										</#list>
+										</select>
+									</td>
+								</tr>
+							<div>
+								<input type="hidden"  name="departmentId" value="${department.departmentId}" >
+								<input type="submit"  class="btn btn-success" value="编辑部门保存" >
+							
+							</div>
+								
+							</tbody>
+							<tfoot>
+								
+							</tfoot>
+						</table>
+						
+					
+				</div>
+			</div>
+			
+		</form>
+		<div style="height: 80px;"></div>
+	</body>
+</html>
+

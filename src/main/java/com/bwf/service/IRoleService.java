@@ -8,4 +8,6 @@ public interface IRoleService {
 
 	List<Role> getAllRoles();
 
+	List<Role> getRolesByDepartmentId(Integer departmentId);
+
 }

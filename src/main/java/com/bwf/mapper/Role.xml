@@ -11,12 +11,21 @@
 		<result column="department_id" property="departmentId"/>
 		<association property="department" column="department_id" javaType="com.bwf.entity.Department">
 		</association>
-
 	</resultMap>
 	
-	<select id="getAllRoles" resultMap="role">
+	<resultMap type="com.bwf.entity.Role" id="simpleRole">
+		<id column="role_id" property="roleId"/>
+		<result column="role_name" property="roleName"/>
+		<result column="department_id" property="departmentId"/>
+	</resultMap>
+	
+	<select id="getAllRoles"   resultMap="role">
 		select * from role left outer join department on 
 		role.department_id = department.department_id
+	</select>
+	
+	<select id="getRolesByDepartmentId"   parameterType="Integer"  resultMap="simpleRole">
+		select * from role where department_id=#{departmentId};
 	</select>
 
 

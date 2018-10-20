@@ -53,9 +53,12 @@ public class AffairServiceImpl implements IAffairService {
 					if ( affairModuleChains.get(i).getApproverId()== -1 ) {
 						// 设置为 当前已登录员工的 上级
 						//System.out.println(userWithLeader.getLeader().getUserId());
-						System.out.println(currentUser.getLeader());
-						//affairChain.setApprover( currentUser.getLeader().getUserId() ); 
-						affairChain.setApprover( 1 ); 
+						//System.out.println("2:"+currentUser.toString());
+						if(currentUser.getLeader()!=null){
+						affairChain.setApprover( currentUser.getLeader().getUserId() ); 
+						}else{
+							affairChain.setApprover( null ); 
+						}
 					} else {
 						// 就设置为当前值
 						affairChain.setApprover( affairModuleChains.get(i).getApproverId() );
@@ -65,6 +68,18 @@ public class AffairServiceImpl implements IAffairService {
 				}
 				affairChainMapper.add ( affairChains );
 		
+	}
+
+	@Override
+	public List<Affair> getAffairByMe(User currentUser) {
+		// TODO Auto-generated method stub
+		return affairMapper.getAffairByMe(currentUser);
+	}
+
+	@Override
+	public Affair getAffairByAffairId(Integer id) {
+		// TODO Auto-generated method stub
+		return affairMapper.getAffairByAffairId( id);
 	}
 
 }

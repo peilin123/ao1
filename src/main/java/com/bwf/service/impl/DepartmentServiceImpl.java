@@ -21,4 +21,34 @@ public class DepartmentServiceImpl implements IDepartmentService{
 		return departmentMapper.getAll();
 	}
 
+	@Override
+	public List<Department> getAllSimpleDepartment() {
+		// TODO Auto-generated method stub
+		return departmentMapper.getAllSimpleDepartment();
+	}
+
+	@Override
+	public void add(Department department) {
+		// TODO Auto-generated method stub
+		departmentMapper.add(department);
+	}
+
+	@Override
+	public Department getDepartmentByDepartmentId(Integer departmentId) {
+		// TODO Auto-generated method stub
+		return departmentMapper.getDepartmentByDepartmentId(departmentId);
+	}
+
+	@Override
+	public void doEdit(Department department) {
+		// TODO Auto-generated method stub
+		departmentMapper.doEdit(department);
+	}
+
+	@Override
+	public void delete(Department department) {
+		// TODO Auto-generated method stub
+		departmentMapper.delete(department);
+	}
+
 }
