@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>BWFUIFramework</title>
+		<link rel="stylesheet" href="${rc.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${rc.contextPath}/css/animate.min.css" />
+		<script type="text/javascript" src="${rc.contextPath}/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/js/wow.js" ></script>
+		<link rel="stylesheet" href="${rc.contextPath}/css/global.css" />
+		<script type="text/javascript" src="${rc.contextPath}/js/global.js" ></script>
+		<script type="text/javascript">
+				$(function(){
+					//考勤签到
+					$(".signbtn").click( function(){
+						location.href='${rc.contextPath}/attendance/sign';
+					});
+					
+					//考勤签到
+					$(".tsbtn").click( function(){
+						location.href='${rc.contextPath}/attendance/signts';
+					});
+					
+				});
+		</script>
+	</head>
+	<body>
+			
+			<form action="" method="get" role="form">
+			
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						考勤管理
+					</div>
+				</div>
+				
+				<div class="panel-body">
+					<input  type="button"  class="btn btn-default  signbtn"   value="考勤签到签退" >
+					<input  type="button"  class="btn btn-default  tsbtn"   value="考勤异常处理" >
+					<input  type="button"  class="btn btn-default"   value="考勤历史查询" >
+					<input  type="button"  class="btn btn-default"   value="考勤统计" >
+								
+				</div>		
+					
+		
+			
+		</form>
+		
+	</body>
+</html>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 对应 dao 中的 接口 -->
+<mapper namespace="com.bwf.dao.AttendanceSignMapper">
+
+	<resultMap type="com.bwf.entity.AttendanceSign" id="attendanceSign">
+		<id column="sign_in_id" property="signInId"/>
+		<result column="date_string" property="dateString"/>
+		<result column="user_id" property="userId"/>
+		<result column="sign_in_time" property="signInTime"/>
+		<result column="sign_in_comment" property="signInComment"/>
+		<result column="sign_out_time" property="signOutTime"/>
+		<result column="sign_in_comment" property="signOutComment"/>
+		
+	</resultMap>
+	
+
+	<insert id="save" parameterType="com.bwf.entity.AttendanceSign">
+		insert into attendance_sign values(null,
+		#{dateString},
+		#{userId},
+		#{signInTime},
+		#{signInComment},
+		#{signOutTime},
+		#{signOutComment}
+		 );
+	</insert>
+	
+	<update id="update"  parameterType="com.bwf.entity.AttendanceSign">
+			update attendance_sign set sign_out_time=#{signOutTime},
+			 sign_out_comment= #{signOutComment} 
+			where date_string=#{dateString} and user_id=#{userId} ;
+	</update>
+	
+	<select id="getAttsByDate" parameterType="String"  resultMap="attendanceSign"  >
+			select *from attendance_sign where date_string=#{dateString} 
+	</select>
+	
+	<select id="getAttsByatts" parameterType="com.bwf.entity.AttendanceSign"  resultMap="attendanceSign"  >
+			select *from attendance_sign where date_string=#{dateString} and user_id=#{userId}
+	</select>
+	
+</mapper>

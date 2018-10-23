@@ -33,70 +33,123 @@
 							location.href="${rc.contextPath}/department/detail?departmentId="+$(this).val();
 					});
 					
+				/*	// 上一页
+					$('#btnPrev').click ( function(){
+						location.href= '${rc.contextPath}/department/show?page=' + (${page}-1) ;
+					});
+					
+					// 下一页
+					$('#btnNext').click ( function(){
+						location.href= '${rc.contextPath}/department/show?page=' + (${page}+1) ;
+					});*/
+					
+					
 				});
 		</script>
 	</head>
 	<body>
+			<!-- 内容 -->
 			
 			<form action="" method="get" role="form">
-			
-			<div class="panel panel-default">
-				<div class="panel-heading">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						
+						部门管理
+						<div class="btn-group btn-group-sm pull-right">
+						<!--  <button type="button" class="btn btn-default">
+							<img src="${rc.contextPath}/img/7.png" height="16px"/>
+							&nbsp;&nbsp;批量删除
+						</button>-->
+						<button type="button" class="btn btn-default  addDepartment">
+							<img src="${rc.contextPath}/img/plus.png" height="16px"/>
+							&nbsp;&nbsp;添加部门
+						</button>
+						</div>
+					</div>
 					
-					部门管理
-					<div class="btn-group btn-group-sm pull-right">
-					<!--  <button type="button" class="btn btn-default">
-						<img src="${rc.contextPath}/img/7.png" height="16px"/>
-						&nbsp;&nbsp;批量删除
-					</button>-->
-					<button type="button" class="btn btn-default  addDepartment">
-						<img src="${rc.contextPath}/img/plus.png" height="16px"/>
-						&nbsp;&nbsp;添加部门
-					</button>
+					<div class="panel-body">
+						
+							<table class="table table-bordered table-condensed table-hover table-responsive cbx-group">
+								<thead>
+									<tr>
+										<th class="td-checkbox"><input type="checkbox" class="cbx-all"/></th>
+										<th>部门编号</th>
+										<th>部门名称</th>
+										<th>部门领导</th>	
+										<th>操作选项</th>
+									</tr>
+								</thead>
+								<tbody>
+									
+									<#list allDepartment as department>
+									<tr>
+										<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
+										<td>${department.departmentId}</td>
+										<td>${department.departmentName}</td>
+										<td>${department.leader.nickname}</td>
+										<td width="120px">
+											<span class="btn-group btn-group-xs  " >
+												<button type="button" class="btn btn-default departmentDetail" value="${department.departmentId}">查看</button>
+												<button type="button" class="btn btn-default departmentEdit" value="${department.departmentId}">编辑</button>
+												<button type="button" class="btn btn-danger departmentDelete" value="${department.departmentId}">删除</button>
+											</span>
+										</td>
+									</tr>
+									</#list>
+						
+								</tbody>
+								<tfoot>
+									
+									
+								</tfoot>
+							</table>
 					</div>
 				</div>
-				
-				<div class="panel-body">
-					
-						<table class="table table-bordered table-condensed table-hover table-responsive cbx-group">
-							<thead>
-								<tr>
-									<th class="td-checkbox"><input type="checkbox" class="cbx-all"/></th>
-									<th>部门编号</th>
-									<th>部门名称</th>
-									<th>部门领导</th>	
-									<th>操作选项</th>
-								</tr>
-							</thead>
-							<tbody>
+			</form>
 								
-								<#list allDepartment as department>
-								<tr>
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td>${department.departmentId}</td>
-									<td>${department.departmentName}</td>
-									<td>${department.leader.nickname}</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs  " >
-											<button type="button" class="btn btn-default departmentDetail" value="${department.departmentId}">查看</button>
-											<button type="button" class="btn btn-default departmentEdit" value="${department.departmentId}">编辑</button>
-											<button type="button" class="btn btn-danger departmentDelete" value="${department.departmentId}">删除</button>
-										</span>
-									</td>
-								</tr>
-								</#list>
-								
-							</tbody>
-							<tfoot>
-								
-							</tfoot>
-						</table>
+						<!-- 分页 -->
+			<div class="row">
+					<div class="col-lg-8 col-md-7 col-sm-7 col-xs-5">
+						<div class="btn-group btn-group-sm">
+							<button type="button" class="btn btn-darkgreen">
+								<span class="hidden-xs hidden-sm"> 首 页 </span>
+								<span class="hidden-lg hidden-md"> |&lt; </span>
+							</button>
+							<button id="btnPrev" type="button" class="btn btn-darkgreen">
+								<span class="hidden-xs hidden-sm"> 上一页 </span>
+								<span class="hidden-lg hidden-md"> &lt;&lt; </span>
+							</button>
+							<button type="button" class="btn btn-default hidden-xs hidden-sm hidden-md">
+								1
+							</button>
+							<button id="btnNext" type="button" class="btn btn-darkgreen">
+								<span class="hidden-xs hidden-sm"> 下一页 </span>
+								<span class="hidden-lg hidden-md"> &gt;&gt; </span>
+							</button>
+							<button type="button" class="btn btn-darkgreen">
+								<span class="hidden-xs hidden-sm"> 末 页 </span>
+								<span class="hidden-lg hidden-md"> &gt;| </span>
+							</button>
+						</div>
 						
-					
+					</div>
+					<div class="col-lg-4 col-md-5 col-sm-5 col-xs-7">
+						<div class="input-group input-group-sm">
+							<input type="text" class="form-control" placeholder="1" />
+							<span class="input-group-addon"> / 6 页 </span>
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-darkgreen">
+									Go
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
+								
+								
 			
-		</form>
+		
+		
 		<div style="height: 80px;"></div>
 	</body>
 </html>

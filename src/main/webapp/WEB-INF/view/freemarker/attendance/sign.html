@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>BWFUIFramework</title>
+		<link rel="stylesheet" href="${rc.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${rc.contextPath}/css/animate.min.css" />
+		<script type="text/javascript" src="${rc.contextPath}/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/js/wow.js" ></script>
+		<link rel="stylesheet" href="${rc.contextPath}/css/global.css" />
+		<script type="text/javascript" src="${rc.contextPath}/js/global.js" ></script>
+		<script type="text/javascript">
+				$(function(){
+					//考勤签到
+					$(".signIn").click( function(){
+						
+						$(this).attr("disabled",true);
+						$(".signOut").attr("disabled",false);
+						
+						var url="${rc.contextPath}/attendance/addSign?id=1&comment="+$(".comment").val();
+						
+						$.get(url ,function( jsonData ){
+							
+							var show1=  jsonData.cardTime ;
+							$(".showShangBanTime").empty().append(show1);
+						});
+						
+					});
+					
+					$(".signOut").click( function(){
+						//$(".signIn").attr("disabled",false);
+						$(this).attr("disabled",true);
+						var url="${rc.contextPath}/attendance/addSign?id=2&comment="+$(".comment").val();
+						$.get( url,function(jsonData){
+							
+							var show2= jsonData.cardTime ;
+							$(".showXiabanTime").empty().append(show2);
+							
+						});
+					});
+			
+				});
+		</script>
+	</head>
+	<body>
+			
+			<form action="" method="get" role="form">
+			
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						考勤签到签退
+						<div align="right">
+								<input  type="button"  onclick="history.back();" class="btn btn-default  "   value="返回" >
+						</div>
+					</div>
+				</div>
+				
+				<div class="panel-body">
+					<div >
+						签卡日期：<input  type="text"  class=" dayString"   value="${daytime}" > 
+						<input  type="button"  class=" btn btn-default  signIn"   value="签到"> 
+						<input  type="button"  class=" btn btn-default  signOut"  disabled="disabled"  value="签退">
+						<br>
+						<textarea rows="5" cols="50"  name=" comment" class="comment" placeholder="备注" ></textarea>
+					</div>
+					<hr>
+					<div class="showShangBanTime" >
+					
+					</div>
+					<div class="showXiabanTime" >
+					
+					</div>	
+					
+						
+				</div>	
+				
+					
+					
+		
+			
+		</form>
+		
+	</body>
+</html>
+
